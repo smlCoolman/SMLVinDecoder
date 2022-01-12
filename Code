@@ -1,0 +1,10 @@
+
+import requests,json, pandas as pd, io;
+url = 'https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesbatch/';
+VIN= input("VIN#:")
+post_fields = {'format': 'csv', 'data':VIN};
+r = requests.post(url, data=post_fields);	
+data=r.text	
+df = pd.read_csv(io.StringIO(data), sep=",");
+pd.set_option('display.max_columns', None);
+print(df)
